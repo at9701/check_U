@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中聯油脂案｜下架產品與下游業者查詢</title>
+<meta property="og:title" content="中聯油脂案｜下架產品與下游業者查詢">
+<meta property="og:description" content="食藥署官方清單即時查詢：下架產品（440項＋泰山下游42項）、下游業者合併查詢（7/16整併1,322家＋福懋29批流向＋4–6月下游清單，共1,682家）。含事件時間軸與油品批號速查。">
+<meta property="og:type" content="website">
+<meta name="description" content="中聯油脂苯駢芘超標案 預防性下架產品與下游業者查詢，資料來源：衛福部食藥署中聯油脂案專區與泰山、福懋官網公告。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbfaf7; --ink:#1c2430; --ink2:#4a5568; --line:#d8d4c8;
+  --alert:#c2361f; --alert-bg:#fbeae5; --safe:#1d6b4f; --safe-bg:#e4f1ea;
+  --tag:#efece3; --navy:#20364f; --warn:#8a6d1a; --warn-bg:#f7f0da;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:'Noto Sans TC',sans-serif;font-size:15px;line-height:1.65}
+.mono{font-family:'IBM Plex Mono',monospace}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header{border-bottom:3px solid var(--ink);background:#fff}
+.head-top{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0 0;font-size:12px;letter-spacing:.14em;color:var(--ink2)}
+h1{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(24px,4.2vw,38px);letter-spacing:.04em;padding:6px 0 2px}
+.sub{color:var(--ink2);padding-bottom:14px;font-size:14px}
+.sub b{color:var(--alert)}
+.batchline{border-top:1px solid var(--line);padding:9px 0 14px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12.5px;color:var(--ink2)}
+.batchline .mono{color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:22px 0}
+.stat{background:#fff;padding:14px 16px}
+.stat .num{font-family:'Noto Serif TC',serif;font-weight:900;font-size:30px;line-height:1.1}
+.stat .lbl{font-size:12px;color:var(--ink2);letter-spacing:.08em;margin-top:2px}
+.stat.alert .num{color:var(--alert)}
+.scope-note{border:1.5px solid var(--alert);background:var(--alert-bg);padding:12px 16px;margin:0 0 22px;font-size:13.5px;line-height:1.7}
+.scope-note b{color:var(--alert)}
+.scope-note.info{border-color:var(--navy);background:#eef2f7}
+.scope-note.info b{color:var(--navy)}
+details.timeline{border:1px solid var(--line);background:#fff;margin-bottom:22px}
+details.timeline summary{cursor:pointer;padding:12px 16px;font-weight:700;font-size:14px;letter-spacing:.06em;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.timeline summary::after{content:"＋";font-weight:400;color:var(--ink2)}
+details[open].timeline summary::after{content:"－"}
+.tl{padding:4px 16px 16px;display:grid;gap:8px}
+.tl-row{display:grid;grid-template-columns:74px 1fr;gap:12px;font-size:13.5px;border-top:1px dashed var(--line);padding-top:8px}
+.tl-row .d{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--alert);font-weight:500;padding-top:2px}
+.controls{position:sticky;top:0;z-index:10;background:var(--paper);padding:12px 0 10px;border-bottom:1px solid var(--line)}
+.controls-inner{display:flex;flex-wrap:wrap;gap:8px}
+input[type=search]{flex:1 1 240px;padding:9px 14px;border:1.5px solid var(--ink);background:#fff;font-family:inherit;font-size:14px;border-radius:0}
+input[type=search]:focus{outline:2px solid var(--navy);outline-offset:1px}
+select{padding:9px 10px;border:1.5px solid var(--line);background:#fff;font-family:inherit;font-size:13.5px;color:var(--ink);border-radius:0;max-width:190px}
+select:focus{outline:2px solid var(--navy);outline-offset:1px}
+.toggle{display:flex;align-items:center;gap:6px;font-size:13px;border:1.5px solid var(--line);background:#fff;padding:0 12px;cursor:pointer;user-select:none}
+.toggle input{accent-color:var(--alert)}
+.count{font-size:12.5px;color:var(--ink2);padding:6px 2px 0}
+.count b{color:var(--alert);font-family:'IBM Plex Mono',monospace}
+.tablewrap{overflow-x:auto;margin:14px 0 8px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);font-size:13.5px}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 12px;font-weight:500;font-size:12.5px;letter-spacing:.08em;white-space:nowrap;position:sticky;top:0}
+td{padding:8px 12px;border-top:1px solid #edeae0;vertical-align:top}
+tr:hover td{background:#f6f4ec}
+tr.isnew td{background:#fdf6f4}
+tr.isnew:hover td{background:#faece8}
+td.pid{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink2);white-space:nowrap}
+td.vendor{max-width:210px}
+td.exp{font-family:'IBM Plex Mono',monospace;font-size:11.5px;max-width:230px;color:var(--ink2)}
+.chip{display:inline-block;background:var(--tag);padding:1px 8px;font-size:11.5px;border-radius:2px;white-space:nowrap;color:var(--ink2)}
+.badge{display:inline-block;font-size:10.5px;padding:0 6px;border-radius:2px;margin-left:6px;vertical-align:1px;letter-spacing:.05em}
+.badge.new{background:var(--alert);color:#fff}
+.badge.b8{background:var(--tag);color:var(--ink2)}
+.badge.ts{background:var(--navy);color:#fff}
+.srcb{display:inline-block;font-size:10px;padding:1px 6px;border-radius:2px;margin:0 3px 2px 0;letter-spacing:.03em;white-space:nowrap}
+.srcb.s1{background:#e2e9f2;color:#20364f}
+.srcb.s2{background:#f2e6d5;color:#7a4a12}
+.srcb.s4{background:#e9e2f2;color:#4a3480}
+.cnt{color:var(--ink2);font-size:10.5px;margin-left:4px;font-family:'IBM Plex Mono',monospace}
+.vlink{color:inherit;text-decoration:none;border-bottom:1px dotted var(--ink2)}
+.vlink:hover{color:var(--alert)}
+.exp-expired{color:var(--safe)}
+.exp-instant{color:var(--warn)}
+.exp-check{color:var(--ink2);font-style:italic}
+.empty{padding:36px;text-align:center;color:var(--ink2);background:#fff;border:1px solid var(--line);border-top:0}
+footer{margin:26px 0 40px;font-size:12px;color:var(--ink2);border-top:1px solid var(--line);padding-top:12px;line-height:1.9}
+footer .mono{font-size:11px}
+@media (max-width:640px){ td.vendor{max-width:130px} td.exp{max-width:130px} .stat .num{font-size:24px} }
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="head-top"><span>食安事件追蹤・預防性下架</span><span class="mono">資料版本 115.07.16</span></div>
+    <h1>中聯油脂案　下架產品與下游業者查詢</h1>
+    <div class="sub">中聯油脂（油槽315）大豆沙拉油檢出一級致癌物苯駢芘（BaP）<b>8.1 ppb</b>，超標逾4倍。1,300公噸流向泰山、福壽、福懋，波及下游流入市面業者遍及全台。</div>
+    <div class="batchline">
+      <span>源頭批號 <span class="mono">315-1150404</span></span>
+      <span>法定上限 <span class="mono">2.0 ppb</span></span>
+      <span>超標已擴大至 <span class="mono">5批</span>（4–5月製）</span>
+      <span>中聯4–6月 <span class="mono">29批</span> 全面預防性下架</span>
+      <span>產品 <span class="mono">440＋42項</span>（7/9版＋泰山7/16）</span>
+      <span>下游業者合併 <span class="mono">1,682家</span>（三份官方清單）</span>
+      <span>裁罰 <span class="mono">NT$1.652億</span>（史上最高）</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="stats">
+    <div class="stat alert"><div class="num" id="statTotal">—</div><div class="lbl">已逐項公布產品（440項＋泰山42項）</div></div>
+    <div class="stat"><div class="num">1,682</div><div class="lbl">下游業者（三份清單合併）</div></div>
+    <div class="stat"><div class="num">10,376</div><div class="lbl">批號紀錄</div></div>
+    <div class="stat"><div class="num" id="statCity">—</div><div class="lbl">縣市</div></div>
+  </div>
+
+  <div class="scope-note">
+    <b>涵蓋範圍說明（重要）：</b>「下架產品查詢」的440項為食藥署已逐項公布之<b>第1批油（315-1150404）衍生產品</b>明細（115.7.9版），另加泰山7/16公布之下游廠商產品42項。第2–5批（313-1150512、315-1150510、318-1150406、314-1150410）及中聯4–6月其餘批號之衍生產品，官方<b>尚未逐項公布</b>——已改採「相關業者全面預防性下架」管制。因此<b>不在產品清單上不代表未受影響</b>：請改用下方「下游業者查詢」比對店家或供應商是否曾進貨受影響油品，並以各業者公告及食藥署專區為準。
+  </div>
+  <details class="timeline">
+    <summary>事件時間軸與最新進展</summary>
+    <div class="tl">
+      <div class="tl-row"><span class="d">04.04</span><span>中聯生產批號315-1150404大豆沙拉油，出廠自驗1.6ppb合格；4/8–10出貨三大廠共1,300公噸。</span></div>
+      <div class="tl-row"><span class="d">05.13</span><span>南僑自主複驗檢出4.6ppb超標，封存原料、僅通知上游福壽，未通報衛生機關。</span></div>
+      <div class="tl-row"><span class="d">06.15</span><span>中聯品保會議——泰山、福壽、福懋均已知悉油品異常，未依法通報（事後各遭裁罰300–600萬）。</span></div>
+      <div class="tl-row"><span class="d">06.30</span><span>中聯正式通報。食藥署隔日勒令停工，7/3完成第一層油品下架。</span></div>
+      <div class="tl-row"><span class="d">07.07</span><span>公布首波232項；衛福部宣布不分比例全面預防性下架；中聯遭重罰1億6,520萬元。泰山深夜通報第2批（313-1150512，5/12製造）超標2.5ppb。</span></div>
+      <div class="tl-row"><span class="d">07.08</span><span>清單增至401項並全面重編序號。國軍證實已使用56桶福壽香油。高雄第三層業者累計49家（西堤、陶板屋、漢來海港等）。</span></div>
+      <div class="tl-row"><span class="d">07.09</span><span>清單增至440項（+39）：禾家香巧媽媽水餃/餡餅27項、巧福肉鬆12項、晶華酒店與貴族世家門市餐飲入列；味全、味王效期資訊補齊。南僑通報第3批（315-1150510，5/10製造，1,305.9公噸）。</span></div>
+      <div class="tl-row"><span class="d">07.10</span><span>行政院拍板：中聯4–6月製造之全部29批油品一律預防性下架（7/10中午前完成），管制邏輯自「逐批公布」轉為「全面下架、檢驗合格再上架」。食藥署食安處同步彙整<b>福懋29批下游流向清單</b>（出貨期間4/6–6/23，477家業者、2,347筆批號紀錄，含零售與外銷）——已納入下方業者查詢（標記「福懋29批」）。</span></div>
+      <div class="tl-row"><span class="d">07.11</span><span>第2批油下游名單公布：福壽247家、福懋117家實際流入市面（批號C2xx0526系列、BL2x0526D炸酥油、益康20270525-28系列，效期均至2027年），含全聯、統一超食代、酷澎、蝦皮、達美樂、頂呱呱。第一批多數業者重複中鏢。官方另發布<b>「115年4–6月下游業者清單」</b>（597家業者、5,412筆批號紀錄，含91APP、PChome等電商通路）——已納入下方業者查詢（標記「4–6月」）。</span></div>
+      <div class="tl-row"><span class="d">07.12</span><span>累計已知3批超標，受影響油品58個品項，回收共144公噸。中聯29批第三方檢驗報告出爐但不公開——與下游檢驗結果不一致，疑抽樣或檢體問題，交司法調查。</span></div>
+      <div class="tl-row"><span class="d">07.13</span><span>超標擴大為5批：福壽12日晚間通報第4批318-1150406（4/6製，衍生「福壽花生風味精華調合油2L」驗出4.3ppb，10項產品22批號，下游229家）與第5批314-1150410（4/10製，衍生「福壽不飽和大豆沙拉油2L」驗出3.8ppb，21項產品62批號，下游438家）——4月與5月產線均污染，累計667家業者受波及，含全聯阪急麵包、愛之味、統一超食代、頂呱呱。食藥署公布「重新上架原則」。第三層名單擴大：台中111筆（含台中榮總營養室、托嬰中心、胖老爹30+門市），南僑台北146筆。中聯總經理遭聲押禁見；政院擬修法加嚴檢驗。</span></div>
+      <div class="tl-row"><span class="d">07.16</span><span>官方公布「福壽、福懋、泰山油品下游業者清單」1150716版：整併7批源頭批號（315-1150404、318-1150406、313-1150408、314-1150410、315-1150413、315-1150510、313-1150512）之下游業者共<b>1,322家</b>，涵蓋全台21縣市。泰山同日於官網公布<b>下游廠商產品名單</b>：8家業者42項產品（含鬍鬚張蝦醬/日式咖哩/豬肋排、素味食品麵筋製品、屏榮食品即食調理包等）——涉及之中聯批次尚含316-1150504、316-1150515、318-1150517等「7批」以外之批號（屬29批預防性下架範圍）。兩份均已納入本頁查詢。</span></div>
+    </div>
+  </details>
+
+
+  <details class="timeline">
+    <summary>油品批號速查（家中/店內桶裝油自查用）</summary>
+    <div class="tl">
+      <div class="tl-row"><span class="d">源頭批</span><span>中聯超標原油批號共5批：<span class="mono">315-1150404</span>（4/4）、<span class="mono">318-1150406</span>（4/6）、<span class="mono">314-1150410</span>（4/10）、<span class="mono">315-1150510</span>（5/10）、<span class="mono">313-1150512</span>（5/12）。中聯4–6月全部29批已一律下架。</span></div>
+      <div class="tl-row"><span class="d">福壽</span><span>沙拉油18L/18kg <span class="mono">C2xx0426、C2xx0526</span> 系列；塑桶3L <span class="mono">C1xx0426K、C1250526K</span>；炸酥油 <span class="mono">BL2x0526D</span>；香油 <span class="mono">BLxx0626、BSxx0626</span>；全聯通路香油 <span class="mono">BS030626H、BS040626H、BL270526H</span>。</span></div>
+      <div class="tl-row"><span class="d">福懋</span><span>益康大豆沙拉油 <span class="mono">202704xx000407/408</span>、<span class="mono">2027052x000408</span> 系列；益康烹調油 <span class="mono">2027041x000403</span>；一級黃豆油散裝 <span class="mono">2026040x1315、1150512、202605xx1313</span>。</span></div>
+      <div class="tl-row"><span class="d">第4/5批</span><span><b style="color:var(--alert)">家用零售裝（風險最高，效期至2028）：</b>福壽花生風味精華調合油2L <span class="mono">BL100426F、BL130426F</span>（驗出4.3ppb）、不飽和大豆沙拉油2L <span class="mono">C1160426A</span>（驗出3.8ppb）、全聯通路大豆沙拉油3L <span class="mono">C1140426K</span>、全聯福壽香油200g <span class="mono">BS070526H、BS080526H、BS110526H</span>、頂級香油500g <span class="mono">BL240426H</span>。通路含全聯、PChome、統一超食代、酷澎。</span></div>
+      <div class="tl-row"><span class="d">第4/5批業務</span><span>餐飲/量販桶裝：沙拉油18L <span class="mono">C2090426O~C2220426O、C2130426P、C2140426P、C2160426P</span>；炸酥油18L <span class="mono">BL090426D~BL210426D</span>；香油3L <span class="mono">BSxx0426L、BSxx0526L、BL240426L、BL190526L</span>；胡麻油3L <span class="mono">BL200426L</span>；辣椒油3L <span class="mono">BL140426F、BL150426F</span>；敬洋青果多酚調合油2L(外銷) <span class="mono">BLxx0426A</span>。</span></div>
+      <div class="tl-row"><span class="d">泰山</span><span>沙拉油18L <span class="mono">2027040901</span>；大豆沙拉油0.6L <span class="mono">2027041301</span>；精選蔬菜油/好理調合油 <span class="mono">20270725xx</span>；花生風味調和油 <span class="mono">2027100901</span>；歐式果實精華 <span class="mono">2027101301</span>；下游用油（泰山7/16產品名單）金酥耐炸油18L <span class="mono">20270408</span>、黃金優選沙拉油18L <span class="mono">20270520、20270529</span>。</span></div>
+      <div class="tl-row"><span class="d">南僑</span><span>王牌液態油炸專用油、維佳烘焙油脂系列：批號 <span class="mono">315-1150404</span> 及 <span class="mono">2606xxTWNTYxxx</span> 系列（餐飲/烘焙B2B為主）。</span></div>
+      <div class="tl-row"><span class="d">說明</span><span>批號印於桶身或瓶身。上列為已公布之受影響批號規則彙整，實際以食藥署專區各批檔案為準；比對到相符批號請停用並洽原購買通路退換。</span></div>
+    </div>
+  </details>
+
+  <h2 style="font-size:19px;margin:30px 0 10px">下架產品查詢<span style="font-size:12.5px;font-weight:400;color:var(--ink2)">　食藥署 115.07.09・440項（第1批衍生）＋泰山官網 115.07.16・42項</span></h2>
+  <div class="controls">
+    <div class="controls-inner">
+      <input type="search" id="q" placeholder="搜尋產品、業者、效期…（例：炒飯、卜蜂、鬍鬚張）" aria-label="搜尋">
+      <select id="fCity" aria-label="縣市篩選"><option value="">全部縣市</option></select>
+      <select id="fVendor" aria-label="業者篩選"><option value="">全部業者</option></select>
+      <select id="fCat" aria-label="分類篩選"><option value="">全部分類</option></select>
+      <label class="toggle"><input type="checkbox" id="fNew">只看 7/9 新增</label>
+    </div>
+    <div class="count">顯示 <b id="shown">0</b> / <span id="all">0</span> 項　<span id="hint"></span></div>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>序號</th><th>產品名稱</th><th>業者</th><th>縣市</th><th>有效日期</th><th>分類</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="empty" id="empty" style="display:none">沒有符合的項目。試著放寬搜尋字詞或清除篩選。</div>
+  </div>
+
+  <h2 style="font-size:19px;margin:34px 0 10px;padding-top:22px;border-top:2px solid var(--line)">下游業者查詢<span style="font-size:12.5px;font-weight:400;color:var(--ink2)">　三份官方清單合併・1,682家・10,376筆批號紀錄</span></h2>
+
+  <div class="scope-note info">
+    <b>這份名單是什麼：</b>合併三份官方清單——<span class="srcb s1">7/16整併</span>食藥署「福壽、福懋、泰山油品下游業者清單」1150716版（7批超標源頭批號，1,322家）；<span class="srcb s2">福懋29批</span>食藥署食安處「29批中聯油脂下游流向（福懋）」1150710版（4/6–6/23出貨，477家，含零售與外銷紀錄）；<span class="srcb s4">4–6月</span>「115年4–6月下游業者清單」20260711版（597家，含電商通路）。合併後共<b>1,682家、10,376筆批號紀錄</b>；其中360家為1,322家整併清單以外新增。<b>注意</b>：「福懋29批」與「4–6月」清單屬<b>29批全面預防性下架</b>範圍，列入＝曾進貨受影響批號油品（依規定應下架回收），<b>不代表該業者所有產品有問題，也不代表該批油已確認超標</b>。同一筆進貨可能出現在多份清單（來源標籤並列）；「×N」表示該批號在原始清單重複出現N次（多次進貨）。批號欄如「2.02704e+13」為官方原始檔之數字格式異常，照原樣呈現。
+  </div>
+
+  <div class="controls">
+    <div class="controls-inner">
+      <input type="search" id="vq" placeholder="搜尋業者、品項、批號…（例：全聯、鬍鬚張、C2140426O）" aria-label="搜尋下游業者">
+      <select id="vfCity" aria-label="下游業者縣市篩選"><option value="">全部縣市</option></select>
+      <select id="vfSrc" aria-label="清單來源篩選">
+        <option value="0">全部來源</option>
+        <option value="1">7/16整併（7批・1,322家）</option>
+        <option value="2">福懋29批流向（7/10）</option>
+        <option value="4">4–6月下游清單（7/11）</option>
+      </select>
+    </div>
+    <div class="count">符合 <b id="vshownV">0</b> 家業者 / <span id="vshownR">0</span> 筆批號紀錄　<span id="vhint"></span></div>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>業者</th><th>縣市</th><th>品項</th><th>批號</th><th>有效日期</th><th>來源</th></tr></thead>
+      <tbody id="vtbody"></tbody>
+    </table>
+    <div class="empty" id="vempty" style="display:none">沒有符合的業者。試著放寬搜尋字詞。</div>
+  </div>
+
+  <footer>
+    資料來源：衛福部食藥署「中聯油脂案專區」預防性下架產品清單（115.07.09版，440項）；泰山企業官網「下游廠商產品名單」（115.07.16公告，8家42項）；食藥署「福壽、福懋、泰山油品下游業者清單」（1150716版，7批源頭批號、1,322家）；食藥署食安處「29批中聯油脂下游流向（福懋）」（1150710版）；「115年4–6月下游業者清單」（20260711版）。原始PDF存於本站 <span class="mono">sources/</span> 目錄。備註：中聯油脂（油槽315）。<br>
+    效期判讀：「已逾有效日期」＝已售完或下架，非現架商品；「即食食品(失效/已過食用期限)」＝已食用完畢；「供外銷」＝未流入國內市場；「調查中」＝效期資訊尚待業者回報。紅底列＝7/9新增品項，灰標＝7/8新增，深藍標＝泰山7/16產品名單。<br>
+    重新上架原則（7/13公布）：預防性下架產品須待對應油品逐批檢驗合格，方可恢復販售——本頁品項未來將視官方公告標記解禁狀態。<br>
+    退換貨：泰山 <span class="mono">0800-079080</span>｜福壽 <span class="mono">0800-236699</span>｜福懋 <span class="mono">0800-888255</span>｜消費者專線 <span class="mono">1950</span>
+  </footer>
+</main>
+
+<script src="data/products.js"></script>
+<script src="data/vendors.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const tbody = $('tbody');
+// 泰山產品名單 → 與 DATA 相同形狀（TSDATA 由 data/products.js 提供）
+const TS = TSDATA.map(t=>({c:t[1], n:t[2], p:'T'+t[5], name:t[6], exp:t[7], b:'泰山7/16', cat:'泰山下游製品',
+  tip:'使用油品：'+t[3]+'（批號 '+t[4]+'／中聯批次 '+t[0]+'）'}));
+const ALL = DATA.concat(TS);
+function opts(sel, values){ values.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);}); }
+opts($('fCity'), [...new Set(ALL.map(d=>d.c))]);
+opts($('fVendor'), [...new Set(ALL.map(d=>d.n))].sort((a,b)=>a.localeCompare(b,'zh-Hant')));
+opts($('fCat'), [...new Set(ALL.map(d=>d.cat))]);
+$('statTotal').textContent = ALL.length;
+$('statCity').textContent = new Set(VDATA.map(v=>VCITY[v[1]]).concat(ALL.map(d=>d.c))).size;
+$('all').textContent = ALL.length;
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function expClass(e){
+  if(e.includes('已逾有效日期')||e.includes('已過食用期限')||e.includes('失效')) return 'exp-expired';
+  if(e==='供外銷') return 'exp-instant';
+  if(e==='調查中') return 'exp-check';
+  return '';
+}
+function badge(d){
+  if(d.b==='7/9新增') return '<span class="badge new">7/9新增</span>';
+  if(d.b==='7/8新增') return '<span class="badge b8">7/8</span>';
+  if(d.b==='泰山7/16') return '<span class="badge ts">泰山7/16</span>';
+  return '';
+}
+function render(){
+  const q = $('q').value.trim().toLowerCase();
+  const fc=$('fCity').value, fv=$('fVendor').value, fk=$('fCat').value, fn=$('fNew').checked;
+  const rows = ALL.filter(d=>{
+    if(fn && d.b!=='7/9新增') return false;
+    if(fc && d.c!==fc) return false;
+    if(fv && d.n!==fv) return false;
+    if(fk && d.cat!==fk) return false;
+    if(q && !(d.name.toLowerCase().includes(q)||d.n.toLowerCase().includes(q)||d.exp.toLowerCase().includes(q)||d.c.includes(q)||(d.tip&&d.tip.toLowerCase().includes(q)))) return false;
+    return true;
+  });
+  $('shown').textContent = rows.length;
+  $('empty').style.display = rows.length ? 'none':'block';
+  $('hint').textContent = (fv||fc||fk||q||fn) ? '（已套用篩選）' : '';
+  tbody.innerHTML = rows.map(d=>`<tr${d.b==='7/9新增'?' class="isnew"':''}>
+      <td class="pid">${typeof d.p==='number'?String(d.p).padStart(3,'0'):esc(d.p)}</td>
+      <td${d.tip?` title="${esc(d.tip)}"`:''}>${esc(d.name)}${badge(d)}</td>
+      <td class="vendor"><a href="#vq" class="vlink" data-v="${esc(d.n)}" title="在下游業者清單中查詢此業者">${esc(d.n)}</a></td>
+      <td>${esc(d.c)}</td>
+      <td class="exp ${expClass(d.exp)}">${esc(d.exp)}</td>
+      <td><span class="chip">${esc(d.cat)}</span></td>
+    </tr>`).join('');
+}
+['q','fCity','fVendor','fCat'].forEach(id=>$(id).addEventListener('input',render));
+$('fNew').addEventListener('change',render);
+render();
+
+// ===== 下游業者查詢（VCITY / VSRC / VDATA 由 data/vendors.js 提供）=====
+// VDATA 格式：[業者名, 縣市索引, [[品項, 批號, 有效日期, 來源bitmask, 重複次數], ...]]
+const vq=$('vq'), vfCity=$('vfCity'), vfSrc=$('vfSrc'), vtbody=$('vtbody');
+opts(vfCity, VCITY);
+function vnorm(s){return String(s).toLowerCase().replace(/[\s　]+/g,'').replace(/㇐/g,'一');}
+function srcTags(m){
+  let h='';
+  if(m&1) h+='<span class="srcb s1">7/16整併</span>';
+  if(m&2) h+='<span class="srcb s2">福懋29批</span>';
+  if(m&4) h+='<span class="srcb s4">4–6月</span>';
+  return h;
+}
+function vrender(){
+  const q=vnorm(vq.value.trim());
+  const fc=vfCity.value;
+  const fs=parseInt(vfSrc.value,10);
+  let vcount=0, rcount=0, out=[], capped=false;
+  const CAP=600;
+  for(const [n,ci,rows] of VDATA){
+    const city=VCITY[ci];
+    if(fc && city!==fc) continue;
+    const frows = fs ? rows.filter(r=>r[3]&fs) : rows;
+    if(!frows.length) continue;
+    if(q){
+      const hay=vnorm(n)+'|'+frows.map(r=>vnorm(r[0])+vnorm(r[1])+vnorm(r[2])).join('|');
+      if(!hay.includes(q)) continue;
+    }
+    vcount++; rcount+=frows.length;
+    if(rcount<=CAP){
+      frows.forEach((r,i)=>{
+        out.push(`<tr><td class="vendor">${i===0?esc(n):''}</td><td>${i===0?city:''}</td><td>${esc(r[0])}${r[4]>1?`<span class="cnt">×${r[4]}</span>`:''}</td><td class="pid">${esc(r[1])}</td><td class="exp">${esc(r[2])}</td><td>${srcTags(r[3])}</td></tr>`);
+      });
+    } else capped=true;
+  }
+  vtbody.innerHTML=out.join('');
+  $('vshownV').textContent=vcount;
+  $('vshownR').textContent=rcount;
+  $('vempty').style.display=vcount?'none':'block';
+  $('vhint').textContent=capped?`（僅顯示前${CAP}筆，請輸入關鍵字或選擇縣市縮小範圍）`:'';
+}
+vq.addEventListener('input',vrender);
+vfCity.addEventListener('change',vrender);
+vfSrc.addEventListener('change',vrender);
+vrender();
+document.getElementById('tbody').addEventListener('click',e=>{
+  const a=e.target.closest('.vlink'); if(!a) return;
+  e.preventDefault();
+  vfCity.value='';
+  vq.value=a.dataset.v.replace(/-.+$/,'').replace(/\(.+$/,'');
+  vrender();
+  document.getElementById('vq').scrollIntoView({behavior:'smooth',block:'center'});
+});
+</script>
+</body>
+</html>
